@@ -46,45 +46,28 @@ const styles = StyleSheet.create({
     marginVertical: theme.SIZES.BASE / 2,
     borderWidth: 0,
     minHeight: 114,
-    // borderColor: 'yellow',
-    // borderWidth: 1,
   },
   leagueTitle: {
-    // flex: 1,}
-    // flexWrap: 'wrap',
-    // paddingBottom: 6,
     fontWeight: 'bold',
-    // borderColor: 'blue',
-    // borderWidth: 1,
   },
   leagueDescription: {
     flex: 1, // Toma el resto del espacio disponible
     justifyContent: 'center',
     padding: theme.SIZES.BASE / 2,
-    // borderColor: 'green',
-    // borderWidth: 1,
   },
   imageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    // borderColor: 'red',
-    // borderWidth: 1,
   },
   image: {
     borderRadius: 3,
     marginHorizontal: theme.SIZES.BASE / 2,
-    // marginTop: -16,
-    // borderColor: 'blue',
-    // borderWidth: 1,
   },
   horizontalImage: {
     height: 90,
     width: 90, 
-    // borderColor: 'red',   
-    // borderWidth: 3,
   },
   fullImage: {
-    // height: 215,
     width: width - theme.SIZES.BASE * 3,
   },
   shadow: {

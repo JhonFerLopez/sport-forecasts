@@ -3,17 +3,16 @@ import "@/global.css";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon, NativeBaseProvider } from 'native-base';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { theme } from './styles/theme';
 // Import the required icon libraries
 import { MaterialIcons } from '@expo/vector-icons';
+import * as Font from 'expo-font';
 
 // Opcional: Contexto global si necesitas manejar estado entre componentes
 import { AppContextProvider } from './store/AppContext';
 
 import { HomeScreen } from './screens/HomeScreen';
-// import { MatchDetailsScreen } from './screens/MatchDetailsScreen';
-// import { TeamDetailsScreen } from './screens/TeamDetailsScreen';
 import { LeagueDetailsScreen } from './screens/LeagueDetailsScreen';
 
 const Tab = createBottomTabNavigator();
@@ -26,12 +25,9 @@ const HomeStack = () => {
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#1a365d', //color de fondo de la barra de navegación
+            backgroundColor: theme.colors.template.primary, //color de fondo de la barra de navegación
           },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
+          headerTintColor: '#fff'
         }}
       >
         <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerTitle: 'INICIO' }} />
@@ -59,9 +55,12 @@ const TeamStack = () => {
     <GluestackUIProvider mode="light"><Stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#1a365d',
+            backgroundColor: theme.colors.template.primary,
           },
           headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         }}
       >
         <Stack.Screen name="TeamScreen" component={TeamScreen} options={{ headerTitle: 'Equipo' }} />
@@ -77,18 +76,32 @@ const ProfileScreen = () => {
     <GluestackUIProvider mode="light"><Stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#f4511e',
+            backgroundColor: theme.colors.template.primary,
           },
           headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         }}
       >
-        <Stack.Screen name="ProfileScreen" component={ProfileScreen} options={{ headerTitle: 'Steven' }} />
+        <Stack.Screen name="ProfileScreen" component={ProfileScreen} options={{ headerTitle: 'Perfil' }} />
         {/* <Stack.Screen name="PlayerDetails" component={PlayerDetailsScreen} options={{ headerTitle: 'Detalle del Jugador' }} /> */}
       </Stack.Navigator></GluestackUIProvider>
   );
 };
 
+
 export default function Layout() {
+
+  useEffect(() => {
+    async function loadFonts() {
+      await Font.loadAsync({
+        ...MaterialIcons.font,
+      });
+    }
+    loadFonts();
+  }, []);
+
   return (
     <GluestackUIProvider mode="light"><NativeBaseProvider theme={theme}>
         <AppContextProvider>
@@ -97,22 +110,25 @@ export default function Layout() {
             screenOptions={({ route }) => ({
               tabBarIcon: ({ focused, color, size }) => {
                 let iconName;
+                let iconColor;
                 let IconComponent = MaterialIcons;
-
                 if (route.name === 'Home') {
-                  iconName = focused ? 'home' : 'home-outline';
+                  iconName = focused ? 'home' : 'home';
+                  iconColor = focused ? theme.colors.template.primary : theme.colors.template.secondary;
                 } else if (route.name === 'Team') {
-                  iconName = focused ? 'soccer' : 'shield-outline';
+                  iconName = focused ? 'groups' : 'groups';
+                  iconColor = focused ? theme.colors.template.primary : theme.colors.template.secondary;
                 } else if (route.name === 'Profile') {
-                  iconName = focused ? 'person' : 'person-outline';
+                  iconName = focused ? 'account-circle' : 'account-circle';
+                  iconColor = focused ? theme.colors.template.primary : theme.colors.template.secondary;
                   // IconComponent = Ionicons;
                 }
 
                 return <GluestackUIProvider mode="light">
-                  <Icon as={IconComponent} name={iconName} size={size} color={color} />
+                  <Icon as={IconComponent} name={iconName} size={size} color={iconColor} />
                 </GluestackUIProvider>;
               },
-              tabBarActiveTintColor: '#1a365d',
+              tabBarActiveTintColor: theme.colors.template.primary,
               tabBarInactiveTintColor: 'gray',
               headerShown: false
             })}

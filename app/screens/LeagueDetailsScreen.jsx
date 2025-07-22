@@ -1,12 +1,34 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Box, Heading, HStack, Image, Pressable, Text, VStack } from 'native-base';
+import { useState } from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
+import { ClassificationTable } from '../components/home/ClassificationTable';
 
 // Componente de pantalla completa
 export const LeagueDetailsScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const { league } = route.params;
+  const [showTable, setShowTable] = useState(false);
+
+  if (showTable) {
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#f5f5f5' }}>
+        <Box bg="white" px={4} py={3} shadow={1}>
+          <HStack alignItems="center" space={3}>
+            <Text fontSize="lg" fontWeight="bold" flex={1}>
+              { league.shortName || league.name } 
+            </Text>
+          </HStack>
+        </Box>
+        <ScrollView>
+          <Box p={4}>
+            <ClassificationTable league={league} />
+          </Box>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f5f5f5' }}>
@@ -84,10 +106,7 @@ export const LeagueDetailsScreen = () => {
               bg="primary.600" 
               p={4} 
               borderRadius="lg"
-              onPress={() => {
-                // Navegar a clasificación
-                console.log('Ver clasificación');
-              }}
+              onPress={() => setShowTable(true)}
             >
               <Text color="white" textAlign="center" fontWeight="bold">
                 Ver Clasificación
@@ -107,20 +126,6 @@ export const LeagueDetailsScreen = () => {
                 Ver Partidos
               </Text>
             </Pressable>
-            
-            <Pressable 
-              bg="tertiary.600" 
-              p={4} 
-              borderRadius="lg"
-              onPress={() => {
-                // Navegar a estadísticas
-                console.log('Ver estadísticas');
-              }}
-            >
-              <Text color="white" textAlign="center" fontWeight="bold">
-                Ver Estadísticas
-              </Text>
-            </Pressable>
           </VStack>
         </Box>
       </ScrollView>
@@ -137,45 +142,3 @@ const getPositionColor = (position) => {
   if (position === 6) return 'red.500'; // Descenso
   return 'gray.300';
 };
-
-// // Componente original para usar dentro de otras pantallas
-// export const LeagueDetails = ({ teams, title = "Clasificación" }) => {
-//   if (!teams || teams.length === 0) {
-//     return null;
-//   }
-
-//   return (
-//     <Box>
-//       <HStack justifyContent="space-between" alignItems="center" mb={4}>
-//         <Heading size="lg">{title}</Heading>
-//         <Text fontSize="sm" color="primary.500">Ver todo</Text>
-//       </HStack>
-      
-//       <Box bg="white" borderRadius="lg" shadow={2} mb={6}>
-//         <HStack p={3} bg="primary.600" borderTopRadius="lg" justifyContent="space-between">
-//           <Text color="white" fontWeight="bold" width="40%">Equipo</Text>
-//           <Text color="white" fontWeight="bold" width="15%" textAlign="center">PJ</Text>
-//           <Text color="white" fontWeight="bold" width="15%" textAlign="center">PG</Text>
-//           <Text color="white" fontWeight="bold" width="15%" textAlign="center">PE</Text>
-//           <Text color="white" fontWeight="bold" width="15%" textAlign="center">PP</Text>
-//         </HStack>
-        
-//         {teams.map((team, index) => (
-//           <HStack key={index} p={3} alignItems="center" justifyContent="space-between" borderBottomWidth={1} borderBottomColor="coolGray.100">
-//             <HStack width="40%" alignItems="center" space={2}>
-//               <Text width="20px" fontWeight={index <= 2 ? "bold" : "normal"} color={index <= 2 ? "primary.600" : "black"}>
-//                 {index + 1}
-//               </Text>
-//               <Image source={{ uri: team.logo || team.crest }} alt={team.name} size="xs" />
-//               <Text fontWeight="medium" isTruncated>{team.name}</Text>
-//             </HStack>
-//             <Text width="15%" textAlign="center">{team.playedGames || '0'}</Text>
-//             <Text width="15%" textAlign="center" fontWeight="medium">{team.won || '0'}</Text>
-//             <Text width="15%" textAlign="center">{team.draw || '0'}</Text>
-//             <Text width="15%" textAlign="center">{team.lost || '0'}</Text>
-//           </HStack>
-//         ))}
-//       </Box>
-//     </Box>
-//   );
-// };

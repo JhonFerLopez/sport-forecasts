@@ -14,6 +14,10 @@ export const theme = extendTheme({
       700: '#003d7a',
       800: '#002952',
       900: '#001429',
+    },
+    template: {
+      primary: '#148158',
+      secondary: '#36a86c',
     }
   },
   components: {

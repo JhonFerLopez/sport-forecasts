@@ -19,7 +19,8 @@ export const HomeScreen = ({ navigation }) => {
     try {
       setLoading(true);      
       // Cargar clasificación
-      const leaguesData = await footballAPI.getCategories('all');  
+      const leaguesData = await footballAPI.getCategories();  
+      
       setLeagues(leaguesData);            
     } catch (error) {
       // console.error('Error loading data:', error);

@@ -1,3 +1,4 @@
+import * as ApiLeague from '@/constants/Leagues';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -96,13 +97,15 @@ export const footballAPI  = {
   // Ligas
   getCategories: async (filter = 'my_leagues') => {
     try {
-      const response = await apiClient.get('', {
-        params: {
-          req: 'categories',
-          filter: filter
-        }
-      });
-      return response.data?.category;
+      // const response = await apiClient.get('', {
+      //   params: {
+      //     req: 'categories',
+      //     filter: filter
+      //   }
+      // });
+      const response = await ApiLeague.LeaguesApi;
+      // console.log('getCategories: ', response.data);
+      return response.category;
     } catch (error) {
       console.error('Error fetching categories:', error);
       throw error;

@@ -164,3 +164,58 @@ export const LeaguesApi = {
     },
   ]
 };
+
+
+export const LeaguePositions = {
+  title: "Liga Profesional Colombiana 2024",
+  teams: [
+    {
+      position: 1,
+      team: "Atlético Nacional",
+      points: 45,
+      goalsFor: 38,
+      goalsAgainst: 15,
+      goalDifference: 23
+    },
+    {
+      position: 2,
+      team: "Millonarios FC",
+      points: 42,
+      goalsFor: 35,
+      goalsAgainst: 18,
+      goalDifference: 17
+    },
+    {
+      position: 3,
+      team: "América de Cali",
+      points: 40,
+      goalsFor: 32,
+      goalsAgainst: 20,
+      goalDifference: 12
+    },
+    {
+      position: 4,
+      team: "Deportivo Cali",
+      points: 38,
+      goalsFor: 30,
+      goalsAgainst: 22,
+      goalDifference: 8
+    },
+    {
+      position: 5,
+      team: "Junior FC",
+      points: 36,
+      goalsFor: 28,
+      goalsAgainst: 25,
+      goalDifference: 3
+    },
+    {
+      position: 6,
+      team: "Independiente Santa Fe",
+      points: 34,
+      goalsFor: 26,
+      goalsAgainst: 24,
+      goalDifference: 2
+    }
+  ]
+};
