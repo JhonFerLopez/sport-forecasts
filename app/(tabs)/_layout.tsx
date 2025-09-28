@@ -1,44 +1,59 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+const theme = {
+  colors: {
+    template: {
+      primary: '#3B82F6',
+      secondary: '#6B7280'
+    }
+  }
+};
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
-      <Tabs.Screen
-        name="index"
+        tabBarActiveTintColor: theme.colors.template.primary,
+        tabBarInactiveTintColor: theme.colors.template.secondary,
+        headerStyle: {
+          backgroundColor: theme.colors.template.primary,
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
+      <Tabs.Screen 
+        name="home" 
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
+          title: 'Inicio',
+          headerTitle: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="home" size={size} color={color} />
+          ),
+        }} 
       />
-      <Tabs.Screen
-        name="explore"
+      <Tabs.Screen 
+        name="team" 
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
+          title: 'Equipo',
+          headerTitle: 'Team',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="groups" size={size} color={color} />
+          ),
+        }} 
+      />
+      <Tabs.Screen 
+        name="profile" 
+        options={{
+          title: 'Perfil',
+          headerTitle: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="account-circle" size={size} color={color} />
+          ),
+        }} 
       />
     </Tabs>
   );

@@ -1,11 +1,10 @@
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon, Text } from 'native-base';
-import React from 'react';
 
 import { HomeScreen } from '../screens/HomeScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
-import { TeamScreen } from '../screens/TeamScreen';
+// import { TeamScreen } from '../screens/TeamScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -42,7 +41,7 @@ export const BottomTabNavigator = () => {
           )
         }}
       />
-      <Tab.Screen 
+      {/* <Tab.Screen 
         name="Team" 
         component={TeamScreen}
         options={{ 
@@ -50,7 +49,7 @@ export const BottomTabNavigator = () => {
             <Text fontSize="xs" color={color}>Equipo</Text>
           )
         }}
-      />
+      /> */}
       <Tab.Screen 
         name="Profile" 
         component={ProfileScreen} 

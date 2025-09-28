@@ -2,7 +2,8 @@ import { Block } from 'galio-framework';
 import { ScrollView, useToast } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { RefreshControl } from 'react-native';
-import { footballAPI } from '../api/sportsApi';
+// import { footballAPI } from '../api/sportsApi';
+import * as ApiLeague from '@/constants/Leagues';
 import { Loading } from '../components/common/Loading';
 import LeagueListItem from '../components/home/LeagueListItem';
 
@@ -19,7 +20,7 @@ export const HomeScreen = ({ navigation }) => {
     try {
       setLoading(true);      
       // Cargar clasificación
-      const leaguesData = await footballAPI.getCategories();  
+      const leaguesData = await ApiLeague.LeaguesApi();  
       
       setLeagues(leaguesData);            
     } catch (error) {

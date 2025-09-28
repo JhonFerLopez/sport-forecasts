@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { fetchUserProfile } from '../api/sportsApi';
+// import { fetchUserProfile } from '../api/sportsApi_old';
 
 const AppContext = createContext();
 
@@ -19,11 +19,11 @@ export const AppContextProvider = ({ children }) => {
         const userId = await AsyncStorage.getItem('userId');
         const favoriteId = await AsyncStorage.getItem('favoriteTeamId');
         
-        if (userId) {
-          // Obtener datos actualizados de la API
-          const userData = await fetchUserProfile(userId);
-          setUser(userData);
-        }
+        // if (userId) {
+        //   // Obtener datos actualizados de la API
+        //   const userData = await fetchUserProfile(userId);
+        //   setUser(userData);
+        // }
         
         if (favoriteId) {
           setFavoriteTeamId(parseInt(favoriteId, 10));
